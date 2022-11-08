@@ -6,16 +6,18 @@ services:
     networks:
       - mqtt
     volumes:
-    - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
 
   kamstrup:
     image: collinit/kamstrup:0.0.1
     restart: unless-stopped
     networks:
       - mqtt
- #   devices:
- #     - /dev/ttyUSB1:/dev/ttyUSB1
+    devices:
+      - /dev/ttyUSB_kamstrup:/dev/ttyUSB1
    
+    volumes:
+      - ./config.yaml:/config.yaml
 
 networks:
   mqtt:
